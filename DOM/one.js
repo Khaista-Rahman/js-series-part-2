@@ -50,4 +50,3 @@ para3.innerContent = "i am thanos"// if we use this innnerContent in console thi
 let btn = document.querySelector('button');
 btn.setAttribute("id" , "baton");// if a without class or id this will be add class or id with name .
 
-// here is finish the DOM manipulation .

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>learning javascript</title>
+</head>
+<body>
+  <ul class="language">
+    <li>javascript</li>
+    <li>zain</li>
+    <li>bilal </li>
+    <li>yasir</li>
+  </ul>
+</body>
+<script>
+  function newli (langName) {
+    const li = document.querySelector('.language')
+    const newl = document.createElement("li");
+    newl.innerHTML = langName;
+    li.appendChild(newl);
+  };
+  newli("python");
+  newli("swift");
+  newli("flutter");
+  const li = document.querySelector("li:nth-child(5)");// this trick is very important
+  li.innerHTML = "khaista rahman"
+
+</script>
+</html>

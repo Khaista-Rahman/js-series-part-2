@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 PROJECT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>click any box to change background colour</h1>
+    <div class="container">
+      <span class="button" id="grey">click</span>
+      <span class="button" id="yellow">click</span>
+      <span class="button" id="blue">click</span>
+      <span class="button" id="black">click</span>
+    </div>
+    
+  <h1>Created by khaista rahman</h1>
+  
+</body>
+<script>
+  const buttons = document.querySelectorAll('.button');
+  const body = document.querySelector('body');
+  let condition = 0;
+ buttons.forEach(button => {
+  button.addEventListener("click" , e => {
+    e.stopPropagation();
+
+      if (e.target.id === "grey") {
+        // console.log("i am khaista rahman")
+        body.style.backgroundColor = "gray"
+      }
+      if (e.target.id === "yellow") {
+        // console.log("i am khaista rahman")
+        body.style.backgroundColor = "yellow"
+      }
+      if (e.target.id === "blue") {
+        // console.log("i am khaista rahman")
+        body.style.backgroundColor = "blue"
+      }
+      if (e.target.id === "black") {
+        // console.log("i am khaista rahman")
+        body.style.backgroundColor = "black";
+        body.style.color= "white"
+      }
+    
+  })
+ })
+ 
+ body.addEventListener("click" , chan => {
+  body.style.backgroundColor = "white"
+  body.style.color = "black"
+ })
+ 
+</script>
+</html>
