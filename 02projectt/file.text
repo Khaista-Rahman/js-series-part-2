@@ -1,0 +1,33 @@
+ document.querySelector('#bmiForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent the form from submitting
+
+    const heightInput = document.querySelector("#height");
+    const weightInput = document.querySelector("#weight");
+    const resultboard = document.querySelector("#resultboard");
+
+    // Get and parse values
+    const height = parseFloat(heightInput.value);
+    const weight = parseFloat(weightInput.value);
+
+    // Validate inputs
+    if (isNaN(height) || height <= 0) {
+      resultboard.textContent = `Please enter a valid height.`;
+    } else if (isNaN(weight) || weight <= 0) {
+      resultboard.textContent = `Please enter a valid weight.`;
+    } else {
+      // Convert height from cm to meters
+      const heightInMeters = height / 100;
+      const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(2);
+      
+      let status;
+      if (bmi < 18.6) {
+        status = 'Underweight';
+      } else if (bmi >= 18.6 && bmi <= 24.9) {
+        status = 'Normal weight';
+      } else {
+        status = 'Overweight';
+      }
+      
+      resultboard.innerHTML = `<span>Your BMI is ${bmi} (${status})</span>`;
+    }
+  });

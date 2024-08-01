@@ -1,0 +1,11 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+}
+
+#resultboard{
+  height: 30px;
+  width: 170px;
+}
