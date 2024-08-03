@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 Project</title>
+  <style>
+    body{
+      background-color: gray;
+      color: white;
+      display: flex;
+      justify-content: center;
+    }
+    #resultBorad{
+      height: 80px;
+      width: 300px;
+      background-color: rgb(95, 206, 219);
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: x-large;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <h2>guess the Number</h2>
+    <input type="button" value="Clear" id="btn2">
+    <input type=" submit" id="userInput">
+    <input type="button" value="Press" id="btn1">
+    <p>guess the number 1 to 100</p>
+    <div id="resultBorad"> </div>
+  </form>
+  
+</body>
+<script>
+  const num = parseInt(Math.random() * 100 + 1);
+  console.log(num)
+  const btn1 = document.querySelector('#btn1');
+  const board = document.querySelector('#resultBorad');
+  const btn2 = document.querySelector('#btn2');
+
+  btn1.addEventListener("click" , function(e){
+    e.preventDefault();
+    
+    const inputVal = document.querySelector('#userInput');
+    const inputNum = parseInt(inputVal.value);
+
+    if (isNaN(inputNum)) {
+      alert('pLease enter a number');
+    }else if(inputNum < 1){
+      alert('please enter number greater than 0');
+    }else if(inputNum > 100){
+      alert('please enter number less than 100');
+    }else{
+      if (inputNum < num) {
+        alert('You are too low ...');
+      }else if(inputNum > num){
+        alert('you are too high ...');
+      }else{
+        board.innerHTML = `congrats you win the number is ${num}`
+      }
+    }
+
+    btn2.addEventListener("click", () => {
+    inputVal.value = "";
+    board.innerHTML = '';
+    num = generateRandomNum();
+    
+  })
+  function generateRandomNum() {
+    return parseInt(Math.random() * 100 + 1);
+  }
+
+  })
+
+  
+  
+</script>
+</html>
