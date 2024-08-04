@@ -11,7 +11,7 @@
       display: flex;
       justify-content: center;
     }
-    #resultBorad{
+    #resultboard{
       height: 80px;
       width: 300px;
       background-color: rgb(95, 206, 219);
@@ -22,61 +22,100 @@
       font-size: x-large;
       font-weight: 600;
     }
+    #arrBoard{
+      height: 50px;
+      width: 300px;
+      background-color: aquamarine;
+      color: black;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
   <form>
     <h2>guess the Number</h2>
-    <input type="button" value="Clear" id="btn2">
-    <input type=" submit" id="userInput">
+    <input type="button" value="restart" id="btn2">
+    <input type=" submit"  id="userInput" placeholder="enter guess number">
     <input type="button" value="Press" id="btn1">
     <p>guess the number 1 to 100</p>
-    <div id="resultBorad"> </div>
+    <div id="resultboard" ></div>
+    <div id="arrBoard"></div>
+    <div id="count">Guess Count: 10</div>
   </form>
   
 </body>
 <script>
-  const num = parseInt(Math.random() * 100 + 1);
-  console.log(num)
+  const body = document.querySelector('body');
   const btn1 = document.querySelector('#btn1');
-  const board = document.querySelector('#resultBorad');
   const btn2 = document.querySelector('#btn2');
+  const userInput = document.querySelector('#userInput');
+  const resultBoard = document.querySelector('#resultboard');
+  const arrBoard = document.querySelector('#arrBoard');
+  const count = document.querySelector('#count');
+  let guesses = [];
+  let num = generatedRandomNum();
+  guessCount = 10;
 
-  btn1.addEventListener("click" , function(e){
-    e.preventDefault();
-    
-    const inputVal = document.querySelector('#userInput');
-    const inputNum = parseInt(inputVal.value);
 
-    if (isNaN(inputNum)) {
-      alert('pLease enter a number');
-    }else if(inputNum < 1){
-      alert('please enter number greater than 0');
-    }else if(inputNum > 100){
-      alert('please enter number less than 100');
-    }else{
-      if (inputNum < num) {
-        alert('You are too low ...');
-      }else if(inputNum > num){
-        alert('you are too high ...');
-      }else{
-        board.innerHTML = `congrats you win the number is ${num}`
-      }
-    }
+  function guessBoard() {
+    arrBoard.innerText = `Guesses: ${guesses.join(', ')}`;
+  }
 
-    btn2.addEventListener("click", () => {
-    inputVal.value = "";
-    board.innerHTML = '';
-    num = generateRandomNum();
-    
-  })
-  function generateRandomNum() {
+  function generatedRandomNum() {
     return parseInt(Math.random() * 100 + 1);
   }
 
-  })
+  console.log(num); // To check the generated random number
 
-  
-  
+  btn1.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevents form submission
+
+    const inputNum = parseInt(userInput.value); // Gets the user input and parses it as an integer
+
+    if (isNaN(inputNum)) { // Checks if the input is a number
+      alert('Please enter a number');
+      userInput.value = ''; // Clears the input field
+    } else if (inputNum < 1) { // Checks if the number is less than 1
+      alert('Please enter a number greater than 0');
+      userInput.value = ''; // Clears the input field
+    } else if (inputNum > 100) { // Checks if the number is greater than 100
+      alert('Please enter a number less than 100');
+      userInput.value = ''; // Clears the input field
+    } else {
+      guesses.push(inputNum); // Adds the valid guess to the guesses array
+      guessBoard(); // Updates the guesses board
+      guessCount--;
+      count.innerHTML = guessCount
+      if (count.innerHTML === 0 || count.innerHTML === "0") {
+        resultBoard.innerHTML = "Game Over";
+        btn1.style.display = 'none';
+       
+
+      }
+
+      if (inputNum < num) { // Checks if the guess is too low
+        alert('You are too low ...');
+        userInput.value = ''; // Clears the input field
+        counting();
+      } else if (inputNum > num) { // Checks if the guess is too high
+        alert('You are too high ...');
+        userInput.value = ''; // Clears the input field
+        counting()
+      } else { // Correct guess
+        resultBoard.innerHTML = `Congrats! You win. The number is ${num}`;
+      }
+    }
+  });
+
+  btn2.addEventListener("click", () => {
+    num = generatedRandomNum(); // Resets the random number
+    guesses = []; // Clears the guesses array
+    userInput.value = ''; // Clears the input field
+    resultBoard.innerHTML = ''; // Clears the result board
+    arrBoard.innerText = ''; // Clears the guesses board
+    count.innerHTML = 10;
+    btn1.style.display = 'inline-block'
+    console.log(num); // Logs the new random number
+  });
 </script>
 </html>
